@@ -5,12 +5,15 @@ from icecream import ic
 from spacetraders_python_sdk import SpaceTradersClient
 
 
-artifacts_client = SpaceTradersClient()
+spacetraders_client = SpaceTradersClient()
 
 
 def test_get_agent():
     """Tests."""
-    result = artifacts_client.agents.get_agent()
+    error, result = spacetraders_client.agents.get_agent()
+
+    if not result:
+        raise Exception(error)
 
     assert result
     ic(result)
@@ -18,7 +21,10 @@ def test_get_agent():
 
 def test_list_agents():
     """Tests."""
-    result = artifacts_client.agents.list_agents()
+    error, result = spacetraders_client.agents.list_agents()
+
+    if not result:
+        raise Exception(error)
 
     assert result
     ic(result)
@@ -26,7 +32,10 @@ def test_list_agents():
 
 def test_get_public_agent():
     """Tests."""
-    result = artifacts_client.agents.get_public_agent()
+    error, result = spacetraders_client.agents.get_public_agent()
+
+    if not result:
+        raise Exception(error)
 
     assert result
     ic(result)

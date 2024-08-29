@@ -55,12 +55,12 @@ class Contracts:
 
     def get_contract(
         self,
-        contract_id: Annotated[str, Field(description="The contract ID.")]
+        contract_symbol: Annotated[str, Field(description="The contract ID.")]
     ) -> Tuple[str, ContractResponseSchema | None]:
         """Get the details of a contract by ID."""
         try:
             response = self.session.get(
-                url=f"{self.api_url}/my/contracts/{contract_id}",
+                url=f"{self.api_url}/my/contracts/{contract_symbol}",
             )
 
             response.raise_for_status()
@@ -79,7 +79,7 @@ class Contracts:
 
     def accept_contract(
         self,
-        contract_id: Annotated[str, Field(description="The contract ID.")]
+        contract_symbol: Annotated[str, Field(description="The contract ID.")]
     ) -> Tuple[str, AcceptContractResponseSchema | None]:
         """Accept a contract by ID.
 
@@ -88,7 +88,7 @@ class Contracts:
         """
         try:
             response = self.session.post(
-                url=f"{self.api_url}/my/contracts/{contract_id}/accept",
+                url=f"{self.api_url}/my/contracts/{contract_symbol}/accept",
             )
 
             response.raise_for_status()
@@ -107,7 +107,7 @@ class Contracts:
 
     def deliver_cargo_to_contract(
         self,
-        contract_id: Annotated[str, Field(description="The ID of the contract.")],
+        contract_symbol: Annotated[str, Field(description="The ID of the contract.")],
         ship_symbol: Annotated[str, Field(description=(
             "Symbol of a ship located in the destination to deliver a contract"
             "and that has a good to deliver in its cargo."
@@ -126,7 +126,7 @@ class Contracts:
         """
         try:
             response = self.session.post(
-                url=f"{self.api_url}/my/contracts/{contract_id}/deliver",
+                url=f"{self.api_url}/my/contracts/{contract_symbol}/deliver",
                 json={
                     "shipSymbol": ship_symbol,
                     "tradeSymbol": trade_symbol,
@@ -150,7 +150,7 @@ class Contracts:
 
     def fullfill_contract(
         self,
-        contract_id: Annotated[str, Field(description="The ID of the contract to fulfill.")],
+        contract_symbol: Annotated[str, Field(description="The ID of the contract to fulfill.")],
     ) -> Tuple[str, AcceptContractResponseSchema | None]:
         """Fulfill a contract.
 
@@ -158,7 +158,7 @@ class Contracts:
         """
         try:
             response = self.session.post(
-                url=f"{self.api_url}/my/contracts/{contract_id}/fullfill",
+                url=f"{self.api_url}/my/contracts/{contract_symbol}/fullfill",
             )
 
             response.raise_for_status()

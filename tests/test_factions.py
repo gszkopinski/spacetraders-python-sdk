@@ -5,12 +5,15 @@ from icecream import ic
 from spacetraders_python_sdk import SpaceTradersClient
 
 
-artifacts_client = SpaceTradersClient()
+spacetraders_client = SpaceTradersClient()
 
 
 def test_list_factions():
     """Tests."""
-    result = artifacts_client.factions.list_factions()
+    error, result = spacetraders_client.factions.list_factions()
+
+    if not result:
+        raise Exception(error)
 
     assert result
     ic(result)
@@ -18,9 +21,12 @@ def test_list_factions():
 
 def test_get_faction():
     """Tests."""
-    result = artifacts_client.factions.get_faction(
+    error, result = spacetraders_client.factions.get_faction(
         faction_id="COSMIC",
     )
+
+    if not result:
+        raise Exception(error)
 
     assert result
     ic(result)
