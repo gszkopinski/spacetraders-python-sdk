@@ -358,7 +358,6 @@ class Fleet:
         The survey property is now deprecated. See the extract/survey endpoint for more details.
         """
         try:
-            print(survey)
             deposit_list = []
             for deposit in survey.deposits:
                 deposit_list.append({"symbol": deposit.symbol})
@@ -369,7 +368,6 @@ class Fleet:
                 "expiration": survey.expiration,
                 "size": survey.size.value,
             }
-            print(survey_json)
             response = self.session.post(
                 url=f"{self.api_url}/my/ships/{ship_symbol}/extract/survey",
                 json=survey_json,
