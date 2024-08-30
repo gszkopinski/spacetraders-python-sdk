@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.0.3 (2024-08-30)
+
+### Fix
+
+* fix(fleet): Remove print commands in extract_resource_with_survey method ([`68d25d2`](https://github.com/gszkopinski/spacetraders-python-sdk/commit/68d25d2b59858102f4d865e3729243be6ee4a38e))
+
 ## v0.0.2 (2024-08-30)
 
 ### Fix
