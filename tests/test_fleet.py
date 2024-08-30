@@ -138,3 +138,43 @@ def test_cargo_resources():
             print(f"- {resource.units} {resource.name}")
 
         print("\n")
+
+
+def test_create_survey():
+    """Tests."""
+    error, action = spacetraders_client.fleet.create_survey(
+        ship_symbol="BILLY1-1",
+    )
+
+    if not action:
+        raise Exception(error)
+
+    assert action
+    ic(action)
+    sleep(action.data.cooldown.remainingSeconds)
+
+
+def test_extract_resources_with_survey():
+    """Tests"""
+    error, action_survey = spacetraders_client.fleet.create_survey(
+        ship_symbol="BILLY1-1",
+    )
+
+    if not action_survey:
+        raise Exception(error)
+
+    assert action_survey
+    ic(action_survey)
+    sleep(action_survey.data.cooldown.remainingSeconds)
+
+    error, action = spacetraders_client.fleet.extract_resources_with_survey(
+        ship_symbol="BILLY1-1",
+        survey=action_survey.data.surveys[0],
+    )
+
+    if not action:
+        raise Exception(error)
+
+    assert action
+    ic(action)
+    sleep(action.data.cooldown.remainingSeconds)

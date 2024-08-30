@@ -1853,3 +1853,73 @@ class ExtractResponseSchema(BaseModel):
     """Extract Response Schema."""
 
     data: ExtractSchema
+
+
+class SurveySizeEnum(str, Enum):
+    """Survey Size Enum."""
+
+    SMALL = "SMALL"
+    MODERATE = "MODERATE"
+    LARGE = "LARGE"
+
+
+class SurveyDepositSchema(BaseModel):
+    """Survey Depost Response Schema."""
+
+    symbol: Annotated[str, Field(description="The symbol of the deposit.")]
+
+
+class SurveySchema(BaseModel):
+    """Survey Response Schema."""
+
+    signature: Annotated[
+        str,
+        Field(
+            description=(
+                "A unique signature for the location of this survey."
+                "This signature is verified when attempting an extraction using this survey."
+            )
+        ),
+    ]
+    symbol: Annotated[str, Field(description="The symbol of the waypoint that this survey is for.")]
+    deposits: Annotated[
+        List[SurveyDepositSchema],
+        Field(
+            description=(
+                "A list of deposits that can be found at this location."
+                "A ship will extract one of these deposits when using this survey in an extraction request."
+                "If multiple deposits of the same type are present, the chance of extracting that deposit is increased."
+            )
+        ),
+    ]
+    expiration: Annotated[
+        str,
+        Field(
+            description=(
+                "The date and time when the survey expires."
+                "After this date and time, the survey will no longer be available for extraction."
+            )
+        ),
+    ]
+    size: Annotated[
+        SurveySizeEnum,
+        Field(
+            description=(
+                "The size of the deposit."
+                "This value indicates how much can be extracted from the survey before it is exhausted."
+            )
+        ),
+    ]
+
+
+class CreateSurveySchema(BaseModel):
+    """Create Survey Response Schema."""
+
+    cooldown: CooldownSchema
+    surveys: List[SurveySchema]
+
+
+class CreateSurveyResponseSchema(BaseModel):
+    """Create Survey Response Schema."""
+
+    data: CreateSurveySchema

@@ -51,7 +51,7 @@ def test_get_waypoint():
     """Tests."""
     error, result = spacetraders_client.systems.get_waypoint(
         system_symbol="X1-KX49",
-        waypoint_symbol="X1-KX49-A1",
+        waypoint_symbol="X1-KX49-XC5C",
     )
 
     if not result:

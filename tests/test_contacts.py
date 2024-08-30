@@ -22,7 +22,7 @@ def test_list_contracts():
 def test_get_contract():
     """Tests."""
     error, result = spacetraders_client.contracts.get_contract(
-        contract_symbol="cm09befg7amhhs60cic3fnpgr",
+        contract_id="cm09befg7amhhs60cic3fnpgr",
     )
 
     if not result:
@@ -35,7 +35,7 @@ def test_get_contract():
 def test_accept_contract():
     """Tests."""
     error, result = spacetraders_client.contracts.accept_contract(
-        contract_symbol="cm09befg7amhhs60cic3fnpgr",
+        contract_id="cm09befg7amhhs60cic3fnpgr",
     )
 
     if not result:
@@ -48,7 +48,7 @@ def test_accept_contract():
 def test_deliver_cargo_to_contract():
     """Tests."""
     error, result = spacetraders_client.contracts.deliver_cargo_to_contract(
-        contract_symbol="cm09befg7amhhs60cic3fnpgr",
+        contract_id="cm09befg7amhhs60cic3fnpgr",
         ship_symbol="",
         trade_symbol="deliver_cargo_to_contract",
         units=60,
@@ -64,7 +64,7 @@ def test_deliver_cargo_to_contract():
 def test_fullfill_contract():
     """Tests."""
     error, result = spacetraders_client.contracts.fullfill_contract(
-        contract_symbol="cm09befg7amhhs60cic3fnpgr",
+        contract_id="cm09befg7amhhs60cic3fnpgr",
     )
 
     if not result:

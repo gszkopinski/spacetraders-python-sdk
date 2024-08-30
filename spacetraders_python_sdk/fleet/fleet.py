@@ -7,6 +7,7 @@ import requests
 from pydantic import Field
 
 from ..models.models import (
+    CreateSurveyResponseSchema,
     ExtractResponseSchema,
     ListShipsResponseSchema,
     NavigateShipResponseSchema,
@@ -14,6 +15,7 @@ from ..models.models import (
     ShipCargoResponseSchema,
     ShipOrbitResponseSchema,
     ShipResponseSchema,
+    SurveySchema,
 )
 
 
@@ -251,7 +253,6 @@ class Fleet:
             )
 
             response.raise_for_status()
-            print(response.json())
 
             return (
                 "The ship has successfully docked at its current location.",
@@ -282,6 +283,96 @@ class Fleet:
         try:
             response = self.session.post(
                 url=f"{self.api_url}/my/ships/{ship_symbol}/extract",
+            )
+
+            response.raise_for_status()
+
+            return (
+                "Extracted successfully.",
+                ExtractResponseSchema.model_validate(response.json())
+            )
+
+        except requests.exceptions.HTTPError as error:
+            match error.response.status_code:
+                case 404:
+                    return "ship not found.", None
+                case _:
+                    return f"Unknown error: {error}", None
+
+    def create_survey(
+        self,
+        ship_symbol: Annotated[str, Field(description="The symbol of the ship.")],
+    ) -> Tuple[str, CreateSurveyResponseSchema | None]:
+        """Create surveys on a waypoint that can be extracted such as asteroid fields.
+        A survey focuses on specific types of deposits from the extracted location.
+        When ships extract using this survey,
+        they are guaranteed to procure a high amount of one of the goods in the survey.
+
+        In order to use a survey, send the entire survey details in the body of the extract request.
+
+        Each survey may have multiple deposits, and if a symbol shows up more than once,
+        that indicates a higher chance of extracting that resource.
+
+        Your ship will enter a cooldown after surveying in which it is unable to perform certain actions.
+        Surveys will eventually expire after a period of time or will be exhausted after being extracted several times
+        based on the survey's size.
+        Multiple ships can use the same survey for extraction.
+
+        A ship must have the Surveyor mount installed in order to use this function.
+        """
+        try:
+            response = self.session.post(
+                url=f"{self.api_url}/my/ships/{ship_symbol}/survey",
+            )
+
+            response.raise_for_status()
+
+            return (
+                "Surveys has been created.",
+                CreateSurveyResponseSchema.model_validate(response.json())
+            )
+
+        except requests.exceptions.HTTPError as error:
+            match error.response.status_code:
+                case 404:
+                    return "ship not found.", None
+                case _:
+                    return f"Unknown error: {error}", None
+
+    def extract_resources_with_survey(
+        self,
+        ship_symbol: Annotated[str, Field(description="The symbol of the ship.")],
+        survey: Annotated[SurveySchema, Field(description=(
+            "A resource survey of a waypoint, detailing a specific extraction location and the types of resources"
+            "that can be found there."
+        ))],
+    ) -> Tuple[str, ExtractResponseSchema | None]:
+        """Extract resources from a waypoint that can be extracted, such as asteroid fields, into your ship.
+
+        Send an optional survey as the payload to target specific yields.
+
+        The ship must be in orbit to be able to extract and must have mining equipments installed
+        that can extract goods, such as the Gas Siphon mount for gas-based goods
+        or Mining Laser mount for ore-based goods.
+
+        The survey property is now deprecated. See the extract/survey endpoint for more details.
+        """
+        try:
+            print(survey)
+            deposit_list = []
+            for deposit in survey.deposits:
+                deposit_list.append({"symbol": deposit.symbol})
+            survey_json = {
+                "signature": survey.signature,
+                "symbol": survey.symbol,
+                "deposits": deposit_list,
+                "expiration": survey.expiration,
+                "size": survey.size.value,
+            }
+            print(survey_json)
+            response = self.session.post(
+                url=f"{self.api_url}/my/ships/{ship_symbol}/extract/survey",
+                json=survey_json,
             )
 
             response.raise_for_status()
