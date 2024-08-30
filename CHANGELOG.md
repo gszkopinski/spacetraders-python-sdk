@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.0.2 (2024-08-30)
+
+### Fix
+
+* fix(fleet): Add extract with survey ([`d698628`](https://github.com/gszkopinski/spacetraders-python-sdk/commit/d69862883063570bd3ce225690d0e88efa5c06f6))
+
 ## v0.0.1 (2024-08-29)
 
 ### Fix
