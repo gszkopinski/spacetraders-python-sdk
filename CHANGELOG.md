@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.0.6 (2024-08-31)
+
+### Fix
+
+* fix(fleet): Add sell_cargo method ([`955a5e0`](https://github.com/gszkopinski/spacetraders-python-sdk/commit/955a5e074109b914f77f12ac8a027dd24bcc8fe7))
+
 ## v0.0.5 (2024-08-31)
 
 ### Fix
