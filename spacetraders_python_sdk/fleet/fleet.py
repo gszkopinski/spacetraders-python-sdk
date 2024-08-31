@@ -12,6 +12,7 @@ from ..models.models import (
     ListShipsResponseSchema,
     NavigateShipResponseSchema,
     RefuelShipResponseSchema,
+    SellCargoResponseSchema,
     ShipCargoResponseSchema,
     ShipOrbitResponseSchema,
     ShipResponseSchema,
@@ -55,8 +56,6 @@ class Fleet:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "ships not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -79,8 +78,6 @@ class Fleet:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "ship not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -103,8 +100,6 @@ class Fleet:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "ship not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -134,8 +129,6 @@ class Fleet:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "ship not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -176,8 +169,6 @@ class Fleet:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "ship not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -209,8 +200,6 @@ class Fleet:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "ship not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -262,8 +251,6 @@ class Fleet:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "ship not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -295,8 +282,6 @@ class Fleet:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "ship not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -335,8 +320,6 @@ class Fleet:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "ship not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -383,8 +366,6 @@ class Fleet:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "ship not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -393,7 +374,7 @@ class Fleet:
         ship_symbol: Annotated[str, Field(description="The symbol of the ship.")],
         symbol: Annotated[TradeGoodSchema, Field(description="The good's symbol.")],
         units: Annotated[int, Field(description="Amounts of units to sell of the selected good.")],
-    ) -> Tuple[str, ExtractResponseSchema | None]:
+    ) -> Tuple[str, SellCargoResponseSchema | None]:
         """Sell cargo in your ship to a market that trades this cargo.
 
         The ship must be docked in a waypoint that has the Marketplace trait in order to use this function.
@@ -410,13 +391,11 @@ class Fleet:
             response.raise_for_status()
 
             return (
-                "Extracted successfully.",
-                ExtractResponseSchema.model_validate(response.json())
+                "Cargo was successfully sold.",
+                SellCargoResponseSchema.model_validate(response.json())
             )
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "ship not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None

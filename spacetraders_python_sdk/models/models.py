@@ -1931,3 +1931,17 @@ class CreateSurveyResponseSchema(BaseModel):
     """Create Survey Response Schema."""
 
     data: CreateSurveySchema
+
+
+class SellCargoSchema(BaseModel):
+    """Sell Cargo Response Schema."""
+
+    agent: AgentSchema
+    cargo: ShipCargoSchema
+    transaction: TransactionSchema
+
+
+class SellCargoResponseSchema(BaseModel):
+    """Sell Cargo Response Schema."""
+
+    data: SellCargoSchema

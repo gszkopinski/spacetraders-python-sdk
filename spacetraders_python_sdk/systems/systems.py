@@ -55,8 +55,6 @@ class Systems:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "systems not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -79,8 +77,6 @@ class Systems:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "system not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -112,8 +108,6 @@ class Systems:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "Waypoints not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -140,8 +134,6 @@ class Systems:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "Waypoint not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -171,8 +163,6 @@ class Systems:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                # case 404:
-                #     return "Marketplace not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -203,8 +193,6 @@ class Systems:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "Shipyard not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -231,8 +219,6 @@ class Systems:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "Jump gate not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -259,8 +245,6 @@ class Systems:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "Construction site not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -295,7 +279,5 @@ class Systems:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "Construction site not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None

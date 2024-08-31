@@ -48,8 +48,6 @@ class Contracts:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "contracts not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -72,8 +70,6 @@ class Contracts:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "contract not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -100,8 +96,6 @@ class Contracts:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "contract not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -143,8 +137,6 @@ class Contracts:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "contract not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -170,7 +162,5 @@ class Contracts:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "contract not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None

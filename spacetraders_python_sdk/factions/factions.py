@@ -47,8 +47,6 @@ class Factions:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "factions not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -71,7 +69,5 @@ class Factions:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "faction not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None

@@ -39,8 +39,6 @@ class Agents:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "Agent not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -67,8 +65,6 @@ class Agents:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "Agents not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
 
@@ -91,7 +87,5 @@ class Agents:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "Agent not found.", None
                 case _:
                     return f"Unknown error: {error.response.text}", None
