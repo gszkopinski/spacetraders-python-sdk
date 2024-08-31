@@ -75,6 +75,30 @@ def test_get_market():
     ic(result)
 
 
+def test_list_system_markets():
+    """Tests"""
+    error, market_waypoints = spacetraders_client.systems.list_waypoints_in_system(
+        system_symbol="X1-KX49",
+        traits="MARKETPLACE",
+        waypoint_type="",
+    )
+
+    if not market_waypoints:
+        raise Exception(error)
+
+    for waypoint in market_waypoints.data:
+        error, marketplace = spacetraders_client.systems.get_market(
+            system_symbol="X1-KX49",
+            waypoint_symbol=waypoint.symbol,
+        )
+
+        if not marketplace:
+            raise Exception(error)
+
+        assert marketplace
+        ic(marketplace)
+
+
 def test_get_shipyard():
     """Tests."""
     error, result = spacetraders_client.systems.get_shipyard(

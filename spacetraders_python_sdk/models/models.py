@@ -849,7 +849,7 @@ class MarketTradeGoodSchema(BaseModel):
     ]
     supply: Annotated[SupplyEnum, Field(description="The supply level of a trade good.")]
     activity: Annotated[
-        ActivityeEnum,
+        Optional[ActivityeEnum],
         Field(
             description=(
                 "The activity level of a trade good."
@@ -859,7 +859,7 @@ class MarketTradeGoodSchema(BaseModel):
                 "When activity is weak, consumption or production is near minimum capacity."
             )
         ),
-    ]
+    ] = None
     purchasePrice: Annotated[int, Field(description="The price at which this good can be purchased from the market.")]
     sellPrice: Annotated[int, Field(description="The price at which this good can be sold to the market.")]
 
@@ -875,14 +875,14 @@ class MarketSchema(BaseModel):
     ]
     exports: Annotated[
         List[TradeGoodSchema], Field(description="The list of goods that are exported from this market.")
-    ]
+    ] = []
     imports: Annotated[
         List[TradeGoodSchema], Field(description="The list of goods that are sought as imports in this market.")
-    ]
+    ] = []
     exchange: Annotated[
         List[TradeGoodSchema],
         Field(description="The list of goods that are bought and sold between agents at this market."),
-    ]
+    ] = []
     transactions: Annotated[
         List[TransactionSchema],
         Field(
@@ -890,7 +890,7 @@ class MarketSchema(BaseModel):
                 "The list of recent transactions at this market. Visible only when a ship is present at the market."
             )
         ),
-    ]
+    ] = []
     tradeGoods: Annotated[
         List[MarketTradeGoodSchema],
         Field(
@@ -898,7 +898,7 @@ class MarketSchema(BaseModel):
                 "The list of goods that are traded at this market. Visible only when a ship is present at the market."
             )
         ),
-    ]
+    ] = []
 
 
 class MarketResponseSchema(BaseModel):
