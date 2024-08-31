@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "spacetraders-python-sdk"
-version = "0.0.3"
+version = "0.0.4"
 description = "SpaceTraders API Python SDK"
 authors = ["gszkopinski <gszkopinski@gmail.com>"]
 readme = "README.md"

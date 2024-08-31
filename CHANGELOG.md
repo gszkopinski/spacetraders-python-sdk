@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.0.4 (2024-08-31)
+
+### Fix
+
+* fix(system): wrong transaction model for market ([`42361af`](https://github.com/gszkopinski/spacetraders-python-sdk/commit/42361af2f17f97a0412b672a614a62a56a2a16cd))
+
 ## v0.0.3 (2024-08-30)
 
 ### Fix
