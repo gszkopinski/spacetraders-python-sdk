@@ -51,7 +51,7 @@ class Contracts:
                 case 404:
                     return "contracts not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def get_contract(
         self,
@@ -75,7 +75,7 @@ class Contracts:
                 case 404:
                     return "contract not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def accept_contract(
         self,
@@ -103,7 +103,7 @@ class Contracts:
                 case 404:
                     return "contract not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def deliver_cargo_to_contract(
         self,
@@ -146,7 +146,7 @@ class Contracts:
                 case 404:
                     return "contract not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def fullfill_contract(
         self,
@@ -173,4 +173,4 @@ class Contracts:
                 case 404:
                     return "contract not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None

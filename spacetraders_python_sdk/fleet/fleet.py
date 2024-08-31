@@ -57,7 +57,7 @@ class Fleet:
                 case 404:
                     return "ships not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def get_ship(
         self,
@@ -81,7 +81,7 @@ class Fleet:
                 case 404:
                     return "ship not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def get_ship_cargo(
         self,
@@ -105,7 +105,7 @@ class Fleet:
                 case 404:
                     return "ship not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def orbit_ship(
         self,
@@ -136,7 +136,7 @@ class Fleet:
                 case 404:
                     return "ship not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def navigate_ship(
         self,
@@ -178,7 +178,7 @@ class Fleet:
                 case 404:
                     return "ship not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def dock_ship(
         self,
@@ -211,7 +211,7 @@ class Fleet:
                 case 404:
                     return "ship not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def refuel_ship(
         self,
@@ -264,7 +264,7 @@ class Fleet:
                 case 404:
                     return "ship not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def extract_resources(
         self,
@@ -297,7 +297,7 @@ class Fleet:
                 case 404:
                     return "ship not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def create_survey(
         self,
@@ -337,7 +337,7 @@ class Fleet:
                 case 404:
                     return "ship not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def extract_resources_with_survey(
         self,
@@ -385,4 +385,4 @@ class Fleet:
                 case 404:
                     return "ship not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None

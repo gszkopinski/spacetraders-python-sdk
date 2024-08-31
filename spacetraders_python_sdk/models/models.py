@@ -782,17 +782,25 @@ class TradeGoodSchema(BaseModel):
     description: Annotated[str, Field(description="A description of the good.")]
 
 
+class TransactionTypeEnum(str, Enum):
+    """Transaction Type Enum."""
+
+    PURCHASE = "PURCHASE"
+    SELL = "SELL"
+
+
 class TransactionSchema(BaseModel):
     """Transaction Schema."""
 
-    symbol: Annotated[
-        str,
-        Field(
-            description="The symbol of the market. The symbol is the same as the waypoint where the market is located."
-        ),
-    ]
-    name: Annotated[str, Field(description="The name of the trait.")]
-    description: Annotated[str, Field(description="A description of the trait.")]
+    waypointSymbol: Annotated[str, Field(description="The symbol of the waypoint.")]
+    shipSymbol: Annotated[str, Field(description="The symbol of the ship that made the transaction.")]
+    tradeSymbol: Annotated[str, Field(description="The symbol of the trade good.")]
+    transactionType: Annotated[TransactionTypeEnum, Field(description="The type of transaction.", alias="type")]
+    units: Annotated[int, Field(description="The number of units of the transaction.", ge=0)]
+    pricePerUnit: Annotated[int, Field(description="The price per unit of the transaction.", ge=0)]
+
+    totalPrice: Annotated[int, Field(description="The total price of the transaction.", ge=0)]
+    timestamp: Annotated[str, Field(description="The timestamp of the transaction.")]
 
 
 class MarketTradeGoodTypeEnum(str, Enum):

@@ -50,7 +50,7 @@ class Factions:
                 case 404:
                     return "factions not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def get_faction(
         self,
@@ -74,4 +74,4 @@ class Factions:
                 case 404:
                     return "faction not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None

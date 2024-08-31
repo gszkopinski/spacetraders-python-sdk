@@ -42,7 +42,7 @@ class Agents:
                 case 404:
                     return "Agent not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def list_agents(
         self,
@@ -70,7 +70,7 @@ class Agents:
                 case 404:
                     return "Agents not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def get_public_agent(
         self,
@@ -94,4 +94,4 @@ class Agents:
                 case 404:
                     return "Agent not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None

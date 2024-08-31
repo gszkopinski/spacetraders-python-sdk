@@ -58,7 +58,7 @@ class Systems:
                 case 404:
                     return "systems not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def get_system(
         self,
@@ -82,7 +82,7 @@ class Systems:
                 case 404:
                     return "system not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def list_waypoints_in_system(
         self,
@@ -115,7 +115,7 @@ class Systems:
                 case 404:
                     return "Waypoints not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def get_waypoint(
         self,
@@ -143,20 +143,23 @@ class Systems:
                 case 404:
                     return "Waypoint not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
-    def get_marketplace(
+    def get_market(
         self,
         system_symbol: Annotated[str, Field(description="The system symbol.")],
         waypoint_symbol: Annotated[str, Field(description="The waypoint symbol.")],
     ) -> Tuple[str, MarketResponseSchema | None]:
-        """View the details of a waypoint.
+        """Retrieve imports, exports and exchange data from a marketplace.
 
-        If the waypoint is uncharted, it will return the 'Uncharted' trait instead of its actual traits.
+        Requires a waypoint that has the Marketplace trait to use.
+
+        Send a ship to the waypoint to access trade good prices and recent transactions.
+        Refer to the Market Overview page to gain better a understanding of the market in the game.
         """
         try:
             response = self.session.get(
-                url=f"{self.api_url}/systems/{system_symbol}/waypoints/{waypoint_symbol}/marketplace",
+                url=f"{self.api_url}/systems/{system_symbol}/waypoints/{waypoint_symbol}/market",
             )
 
             response.raise_for_status()
@@ -168,10 +171,10 @@ class Systems:
 
         except requests.exceptions.HTTPError as error:
             match error.response.status_code:
-                case 404:
-                    return "Marketplace not found.", None
+                # case 404:
+                #     return "Marketplace not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def get_shipyard(
         self,
@@ -203,7 +206,7 @@ class Systems:
                 case 404:
                     return "Shipyard not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def get_jump_gate(
         self,
@@ -231,7 +234,7 @@ class Systems:
                 case 404:
                     return "Jump gate not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def get_construction_site(
         self,
@@ -259,7 +262,7 @@ class Systems:
                 case 404:
                     return "Construction site not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None
 
     def supply_construction_site(
         self,
@@ -295,4 +298,4 @@ class Systems:
                 case 404:
                     return "Construction site not found.", None
                 case _:
-                    return f"Unknown error: {error}", None
+                    return f"Unknown error: {error.response.text}", None

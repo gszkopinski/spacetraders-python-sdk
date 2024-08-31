@@ -61,11 +61,11 @@ def test_get_waypoint():
     ic(result)
 
 
-def test_get_marketplace():
+def test_get_market():
     """Tests."""
-    error, result = spacetraders_client.systems.get_marketplace(
-        system_symbol="X1-GJ54",
-        waypoint_symbol="X1-GJ54-ZD2F",
+    error, result = spacetraders_client.systems.get_market(
+        system_symbol="X1-KX49",
+        waypoint_symbol="X1-KX49-G51",
     )
 
     if not result:
