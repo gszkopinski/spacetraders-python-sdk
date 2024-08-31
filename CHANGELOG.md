@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.0.7 (2024-08-31)
+
+### Fix
+
+* fix(fleet): Change sell_cargo response method ([`ec3429d`](https://github.com/gszkopinski/spacetraders-python-sdk/commit/ec3429d0eb129aa3efcebc4a134b9e8427f35c36))
+
 ## v0.0.6 (2024-08-31)
 
 ### Fix
