@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.0.5 (2024-08-31)
+
+### Fix
+
+* fix(system): wrong Market model for market ([`cc0642f`](https://github.com/gszkopinski/spacetraders-python-sdk/commit/cc0642f0cd98b475fbda6dff60a66b59a80b164c))
+
 ## v0.0.4 (2024-08-31)
 
 ### Fix
